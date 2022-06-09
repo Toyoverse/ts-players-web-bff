@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.e2e.test.ts">
+    <testCase name="PlayerController (e2e) / (GET)" duration="1091"/>
+  </file>
+  <file path="/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.test.ts">
+    <testCase name="PlayerController root should return &quot;Hello World!&quot;" duration="13"/>
+  </file>
+</testExecutions>
