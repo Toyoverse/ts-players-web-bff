@@ -21,17 +21,24 @@ export class PlayerService {
     const playerQuery = new Parse.Query(Players);
     playerQuery.equalTo('walletAddress', walletAddress);
     playerQuery.equalTo('walletAddress', walletAddress);
-    const result = await playerQuery.find();
-
-    if (result.length === 0){
+    try{
+      const result = await playerQuery.find();
+    
+      if (result.length === 0){
       return this.CreatePlayers(walletAddress, transactionHash);
+      }
+
+      this.VerifyDateToken(result[0], transactionHash);
+
+      const player: Player = this.PlayerMapper(result[0]);
+
+      return player;
     }
-
-    this.VerifyDateToken(result[0], transactionHash);
-
-    const player: Player = this.PlayerMapper(result[0]);
-
-    return player;
+    catch(error){
+      response.status(500).json({
+        error: [error.message],
+      });
+    } 
 
   }
   private CreatePlayers(walletAddress: string, transactionHash:string ): Player{
@@ -45,13 +52,15 @@ export class PlayerService {
     player.save()
       .then((player)=>{
         console.log('New player created with id: ' + player.id);
-      }, (error) =>{
-        console.log('Failed to create ' + error.message);
+      }, () =>{
+        response.status(500).json({
+          error: ['error trying to save player'],
+        });
       });
     
     return this.PlayerMapper(player);
   }
-  private GenerateToken(walletAddress:String, transactionHash:string){
+  private GenerateToken(walletAddress:String, transactionHash:string): string{
     const token: string = jwt.sign({ walletId: walletAddress, transaction: transactionHash}, 
       process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
@@ -70,11 +79,7 @@ export class PlayerService {
     date.setDate(date.getDate()+days);
     return date;
   }
-  private ValidateSign (result) {
-    const token:string = result.sessionToken;
-    const data = jwt.verify(token, process.env.TOKEN_SECRET);
-  }
-  private PlayerMapper(result: Parse.Object<Parse.Attributes>):Player{
+  private PlayerMapper(result: Parse.Object<Parse.Attributes>): Player{
     const player: Player = new Player();
 
     player.wallet = result.get('walletAddress');
