@@ -20,7 +20,6 @@ export class PlayerService {
     const Players = Parse.Object.extend("Players", Player);
     const playerQuery = new Parse.Query(Players);
     playerQuery.equalTo('walletAddress', walletAddress);
-    playerQuery.equalTo('walletAddress', walletAddress);
     try{
       const result = await playerQuery.find();
     
