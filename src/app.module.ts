@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { PlayerController } from './player.controller';
-import { PlayerService } from './player.service';
+import { PlayerController } from './controllers/player.controller';
+import { PlayerService } from './services/player.service';
 
 @Module({
   imports: [
