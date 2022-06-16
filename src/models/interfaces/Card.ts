@@ -1,4 +1,4 @@
-export interface Cards{
+export interface Card{
     id: string;
     attackType: string;
     image: string;

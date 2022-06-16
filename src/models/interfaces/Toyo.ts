@@ -3,6 +3,7 @@ import { Parts } from "./Parts";
 export interface Toyo{
     id: string;
     name: string;
-    parts: Parts;
+    parts: Parts[];
     hasTenParts: boolean;
+    isToyoSelected: boolean;
 }
