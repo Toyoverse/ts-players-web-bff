@@ -1,7 +1,7 @@
 export interface ToyoPersona{
     id: string;
     name: string;
-    thumbail: string;
+    thumbnail: string;
     video: string;
     bodyType: number;
 

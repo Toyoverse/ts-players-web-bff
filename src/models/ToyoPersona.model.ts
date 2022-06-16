@@ -3,7 +3,7 @@ import { ToyoPersona } from "./interfaces/ToyoPersona";
 export default class ToyoPersonaModel implements ToyoPersona{
     private _id: string;
     private _name: string;
-    private _thumbail: string;
+    private _thumbnail: string;
     private _video: string;
     private _bodyType: number;
 
@@ -21,11 +21,11 @@ export default class ToyoPersonaModel implements ToyoPersona{
     set name(name: string){
         this._name = name;
     }
-    get thumbail(): string{
-        return this._thumbail;
+    get thumbnail(): string{
+        return this._thumbnail;
     }
-    set thumbail(thumbail: string){
-        this._thumbail = thumbail;
+    set thumbnail(thumbnail: string){
+        this._thumbnail = thumbnail;
     }
     get video(): string{
         return this._video;
