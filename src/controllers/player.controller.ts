@@ -6,11 +6,6 @@ import { Request, Response } from 'express';
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
-  @Get()
-  getHello(): string {
-    return this.playerService.getHello();
-  }
-
   @Post('/player/login')
   async login(@Req() request: Request, @Res() response: Response) {
     const wallet: string = request.body.walletAddress;
@@ -21,12 +16,11 @@ export class PlayerController {
         errors: ['WalletAddress and transactionHash is required'],
       });
     }
-    try {
-      const player = await this.playerService.findPlayerByWalletAddress(
-        wallet,
-        transactionHash,
-      );
-      if (player.wallet === wallet) {
+    try{
+      const player = await this.playerService.findPlayerByWalletAddress(wallet, transactionHash);
+      
+      if (player.wallet === wallet){
+
         return response.status(200).json({
           token: player.token,
           expiresAt: player.getExpiresAtFormatted(player.expiresAt),
