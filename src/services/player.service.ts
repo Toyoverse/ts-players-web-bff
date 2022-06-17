@@ -12,10 +12,6 @@ export class PlayerService {
     this.ParseServerConfiguration();
   }
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   async findPlayerByWalletAddress(walletAddress: string, transactionHash: string){
     const Players = Parse.Object.extend("Players", Player);
     const playerQuery = new Parse.Query(Players);
