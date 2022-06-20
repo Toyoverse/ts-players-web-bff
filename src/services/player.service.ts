@@ -36,6 +36,9 @@ export class PlayerService {
     } 
 
   }
+  async playerEnverinment(){
+    return "ok";
+  }
   private CreatePlayers(walletAddress: string, transactionHash:string ): Player{
     const Player = Parse.Object.extend("Players");
     const player = new Player();

@@ -2,11 +2,11 @@ import { Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { PlayerService } from '../services/player.service';
 import { Request, Response } from 'express';
 
-@Controller()
+@Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
-  @Post('/player/login')
+  @Post('/login')
   async login(@Req() request: Request, @Res() response: Response){
     const wallet: string = request.body.walletAddress;
     const transactionHash: string = request.body.transactionHash;
@@ -28,11 +28,21 @@ export class PlayerController {
         return response.status(500).json({
           error: ['The informed player does not match the returned player'],
         });
-      } 
+      }
     } catch {
       return response.status(500).json({
         errors: ['Error could not return player'],
       });
     }
+  }
+
+
+  @Get('/environment')
+  async environment(@Req() request: Request, @Res() response: Response){
+    const value: string = await this.playerService.playerEnverinment();
+    const wallet: string = request.walletId;
+    response.status(200).json({
+      wallet
+    })
   }
 }
