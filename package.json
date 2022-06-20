@@ -1,6 +1,6 @@
 {
   "name": "ts-players-web-bff",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "bff for toyoverse players",
   "author": "",
   "private": true,
@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm install --force --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -54,6 +54,7 @@
     "jest-sonar-reporter": "^2.0.0",
     "plugin": "^0.3.3",
     "prettier": "^2.3.2",
+    "serverless": "^1.83.3",
     "serverless-offline": "^8.8.0",
     "serverless-plugin-optimize": "^4.2.1-rc.1",
     "serverless-plugin-typescript": "^2.1.2",
