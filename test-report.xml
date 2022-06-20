@@ -1,29 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.test.ts">
-    <testCase name="PlayerController root should return &quot;Hello World!&quot;" duration="50">
-      <failure message="Error: Nest can&apos;t resolve dependencies of the PlayerService (?). Please make sure that the argument ConfigService at index [0] is available in the RootTestModule context."><![CDATA[Error: Nest can't resolve dependencies of the PlayerService (?). Please make sure that the argument ConfigService at index [0] is available in the RootTestModule context.
-
-Potential solutions:
-- If ConfigService is a provider, is it part of the current RootTestModule?
-- If ConfigService is exported from a separate @Module, is that module imported within RootTestModule?
-  @Module({
-    imports: [ /* the Module containing ConfigService */ ]
-  })
-
-    at TestingInjector.lookupComponentInParentModules (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/core/injector/injector.js:231:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at TestingInjector.resolveComponentInstance (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/core/injector/injector.js:184:33)
-    at TestingInjector.resolveComponentInstance (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/testing/testing-injector.js:16:45)
-    at resolveParam (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/core/injector/injector.js:106:38)
-    at async Promise.all (index 0)
-    at TestingInjector.resolveConstructorParams (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/core/injector/injector.js:121:27)
-    at TestingInjector.loadInstance (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/core/injector/injector.js:52:9)
-    at TestingInjector.loadProvider (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/@nestjs/core/injector/injector.js:74:9)
-    at async Promise.all (index 3)]]></failure>
-    </testCase>
-  </file>
-  <file path="/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.e2e.test.ts">
-    <testCase name="PlayerController (e2e) / (GET)" duration="680"/>
-  </file>
 </testExecutions>

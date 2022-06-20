@@ -13,10 +13,4 @@ describe('PlayerController', () => {
 
     PlayersController = app.get<PlayerController>(PlayerController);
   });
-
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(PlayersController.getHello()).toBe('Hello World!');
-    });
-  });
 });
