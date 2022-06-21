@@ -5,10 +5,16 @@ import PlayerModel from '../models/Player.model'
 import * as Parse from 'parse/node';
 import { response } from 'express';
 import { json } from 'stream/consumers';
+import { BoxService } from './box.service';
+import { ToyoService } from './toyo.service';
+import BoxModel from 'src/models/Box.model';
+import ToyoModel from 'src/models/Toyo.model';
 
 @Injectable()
 export class PlayerService {
-  constructor(private configService: ConfigService) {
+  constructor(private configService: ConfigService, 
+    private readonly boxService: BoxService, 
+    private readonly toyoService: ToyoService) {
     this.ParseServerConfiguration();
   }
 
@@ -25,7 +31,7 @@ export class PlayerService {
 
       this.VerifyDateToken(result[0], transactionHash);
 
-      const player: PlayerModel = this.PlayerMapper(result[0]);
+      const player: PlayerModel = this.PlayerMapperToken(result[0]);
 
       return player;
     }
@@ -36,9 +42,31 @@ export class PlayerService {
     } 
 
   }
-  async playerEnverinment(){
-    return "ok";
+  async findPlayerEnverinmentByWalletId(walletId: string): Promise<PlayerModel>{
+    const Players = Parse.Object.extend("Players", PlayerModel);
+    const playerQuery = new Parse.Query(Players);
+    playerQuery.equalTo('walletAddress', walletId);
+
+    try{
+      const result = await playerQuery.find();
+
+      if (result.length < 1 || result[0].get('walletAddress') !== walletId){
+        response.status(404).json({
+          erros: ['Player not found!'],
+        });
+      }
+
+      const player: PlayerModel = await this.PlayerMapperEnvironment(result[0]);
+
+      return player;
+
+    }catch(error){
+      response.status(500).json({
+        error: [error.message],
+      });
+    }
   }
+
   private CreatePlayers(walletAddress: string, transactionHash:string ): PlayerModel{
     const Player = Parse.Object.extend("Players");
     const player = new Player();
@@ -56,7 +84,7 @@ export class PlayerService {
         });
       });
     
-    return this.PlayerMapper(player);
+    return this.PlayerMapperToken(player);
   }
   private GenerateToken(walletAddress:String, transactionHash:string): string{
     const token: string = jwt.sign({ walletId: walletAddress, transaction: transactionHash}, 
@@ -74,7 +102,7 @@ export class PlayerService {
     date.setDate(date.getDate()+days);
     return date;
   }
-  private PlayerMapper(result: Parse.Object<Parse.Attributes>): PlayerModel{
+  private PlayerMapperToken(result: Parse.Object<Parse.Attributes>): PlayerModel{
     const player: PlayerModel = new PlayerModel();
 
     player.wallet = result.get('walletAddress');
@@ -99,6 +127,32 @@ export class PlayerService {
         });
       });
     }
+  }
+  private async PlayerMapperEnvironment(result: Parse.Object<Parse.Attributes>): Promise<PlayerModel>{
+    const player: PlayerModel = new PlayerModel();
+
+    player.boxes = await this.BoxesMapper(await result.relation('boxes').query().find());
+    player.toyos = await this.ToyosMapper(await result.relation('toyos').query().find())
+
+    return player;
+  }
+  private async  BoxesMapper(result: Parse.Object<Parse.Attributes>[]): Promise<BoxModel[]>{
+    const boxes: BoxModel[] = [];
+
+    for (let index = 0; index < result.length; index++) {
+      boxes.push(await this.boxService.findBoxById(result[index].id));
+    }
+
+    return boxes;
+  }
+  private async  ToyosMapper(result: Parse.Object<Parse.Attributes>[]): Promise<ToyoModel[]>{
+    const toyos: ToyoModel[] = [];
+
+    for (let index = 0; index < result.length; index++) {
+      toyos.push(await this.toyoService.findToyoById(result[index].id));
+    }
+
+    return toyos
   }
 
   /**

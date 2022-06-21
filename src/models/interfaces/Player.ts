@@ -7,12 +7,12 @@ export interface Player {
     wallet: string;
     token: string;
     expiresAt: Date;
-    toyos: Toyo;
+    toyos: Toyo[];
     lastUnboxingFinishedAt: Date;
     hasPendingUnboxing: boolean;
     lastUnboxingStartedAt: Date;
     toyoParts: Parts[];
-    boxes: Box;
+    boxes: Box[];
 
     getExpiresAtFormatted(expiresAt: Date): string;
 }

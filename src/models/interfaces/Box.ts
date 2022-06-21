@@ -11,6 +11,6 @@ export interface Box{
     idOpenBox: string;
     idClosedBox: string;
     player: Player;
-    parts: Parts;
+    parts: Parts[];
 
 }

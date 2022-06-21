@@ -25,9 +25,7 @@ export class ToyoPersonaService {
       }
 
       const toyo = this.ToyoPersonaMapper(result[0]);
-      console.log(toyo);
-      console.log('Toyo Persona Service');
-
+      
       return toyo;
     }
     catch(error){

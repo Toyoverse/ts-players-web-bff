@@ -16,7 +16,7 @@ export class PartService {
     this.ParseServerConfiguration();
   }
 
-  async findPartById(id: string,){
+  async findPartById(id: string,): Promise<PartModel>{
     const Part = Parse.Object.extend("ToyoParts", PartModel);
     const partQuery = new Parse.Query(Part);
     partQuery.equalTo('objectId', id);
@@ -35,7 +35,7 @@ export class PartService {
       return part;
     }
     catch(error){
-      return response.status(500).json({
+      response.status(500).json({
         error: [error.message],
       });
     } 
