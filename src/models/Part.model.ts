@@ -1,16 +1,15 @@
 import CardModel from "./Card.model";
-import { Parts } from "./interfaces/Parts";
-import StatusModel from "./Status.model";
+import { Parts } from "./interfaces/Part";
 import ToyoPersonaModel from "./ToyoPersona.model";
 
-export default class PartsModel implements Parts{
+export default class PartModel implements Parts{
     private _id: string;
-    private _bonusStatus: StatusModel;
-    private _toyoTecnhnoalloy: string;
+    private _bonusStats: object;
+    private _toyoTechnoalloy: string;
     private _cards: CardModel[];
     private _toyoPersona: ToyoPersonaModel;
     private _toyoPiece: string;
-    private _status: StatusModel;
+    private _status: object;
 
     constructor(){}
     get id(): string{
@@ -19,17 +18,17 @@ export default class PartsModel implements Parts{
     set id(id: string){
         this._id = id;
     }
-    get bonusStatus(): StatusModel{
-        return this._bonusStatus;
+    get bonusStats(): object{
+        return this._bonusStats;
     }
-    set bonusStatus(bonusStatus: StatusModel){
-        this._bonusStatus = bonusStatus;
+    set bonusStats(bonusStats: object){
+        this._bonusStats = bonusStats;
     }
-    get toyoTecnhnoalloy(): string{
-        return this._toyoTecnhnoalloy;
+    get toyoTechnoalloy(): string{
+        return this._toyoTechnoalloy;
     }
     set toyoTechnoalloy(toyoTechnoalloy: string){
-        this._toyoTecnhnoalloy = toyoTechnoalloy;
+        this._toyoTechnoalloy = toyoTechnoalloy;
     }
     get cards(): CardModel[]{
         return this._cards;
@@ -49,10 +48,10 @@ export default class PartsModel implements Parts{
     set toyoPiece(toyoPiece: string){
         this._toyoPiece = toyoPiece;
     }
-    get status(): StatusModel{
+    get status(): object{
         return this._status;
     }
-    set status(status: StatusModel){
+    set status(status: object){
         this._status = status;
     }
     

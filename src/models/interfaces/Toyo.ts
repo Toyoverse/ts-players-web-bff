@@ -1,4 +1,4 @@
-import { Parts } from "./Parts";
+import { Parts } from "./Part";
 
 export interface Toyo{
     id: string;

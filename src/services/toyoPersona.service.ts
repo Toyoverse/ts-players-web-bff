@@ -11,15 +11,14 @@ export class ToyoPersonaService {
     this.ParseServerConfiguration();
   }
 
-  async findToyoPersonaByBodyTyper(bodyType: number,){
+  async findToyoPersonaById(id: string): Promise<ToyoPersona>{
     const toyoPersona = Parse.Object.extend("ToyoPersona", ToyoPersona);
     const toyoPersonaQuery = new Parse.Query(toyoPersona);
-    toyoPersonaQuery.equalTo('bodyType', bodyType);
+    toyoPersonaQuery.equalTo('objectId', id);
     
     try{
       const result = await toyoPersonaQuery.find();
-    
-      if (result.length < 1 || result[0].get('bodyType') !== bodyType){
+      if (result.length < 1 || result[0].id !== id){
         response.status(404).json({
           erros: ['Toyo persona not found!'],
         });
@@ -42,11 +41,11 @@ export class ToyoPersonaService {
   private ToyoPersonaMapper(result: Parse.Object<Parse.Attributes>): ToyoPersona{
     const toyo: ToyoPersona = new ToyoPersona();
 
-    toyo.id = result.get('objectId');
+    toyo.id = result.id;
     toyo.name = result.get('name');
     toyo.thumbnail = result.get('thumbnail');
-    toyo.video = result.get('walletAddress');
-    toyo.bodyType = result.get('walletAddress');
+    toyo.video = result.get('video');
+    toyo.bodyType = result.get('bodyType');
 
     return toyo;
   }

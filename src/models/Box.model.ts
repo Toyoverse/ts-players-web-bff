@@ -1,5 +1,5 @@
 import { Box } from "./interfaces/Box";
-import PartsModel from "./Parts.model";
+import PartsModel from "./Part.model";
 import PlayerModel from "./Player.model";
 import { Toyo } from "./interfaces/Toyo";
 

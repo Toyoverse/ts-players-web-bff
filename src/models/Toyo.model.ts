@@ -1,4 +1,4 @@
-import PartsModel from "./Parts.model";
+import PartsModel from "./Part.model";
 import { Toyo } from "./interfaces/Toyo";
 
 export default class ToyoModel implements Toyo{

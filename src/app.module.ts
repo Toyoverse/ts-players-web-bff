@@ -2,6 +2,8 @@ import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PlayerController } from './controllers/player.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import { CardService } from './services/card.service';
+import { PartService } from './services/part.service';
 import { PlayerService } from './services/player.service';
 import { ToyoPersonaService } from './services/toyoPersona.service';
 
@@ -12,7 +14,7 @@ import { ToyoPersonaService } from './services/toyoPersona.service';
     }),
   ],
   controllers: [PlayerController],
-  providers: [PlayerService, ToyoPersonaService],
+  providers: [PlayerService, ToyoPersonaService, PartService, CardService],
 
 })
 export class AppModule implements NestModule {

@@ -1,10 +1,12 @@
 import { Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { PlayerService } from '../services/player.service';
 import { Request, Response } from 'express';
+import PlayerModel from 'src/models/Player.model';
+import { PartService } from 'src/services/part.service';
 
 @Controller('player')
 export class PlayerController {
-  constructor(private readonly playerService: PlayerService) {}
+  constructor(private readonly playerService: PlayerService, private readonly partService: PartService) {}
 
   @Post('/login')
   async login(@Req() request: Request, @Res() response: Response){
@@ -40,9 +42,9 @@ export class PlayerController {
   @Get('/environment')
   async environment(@Req() request: Request, @Res() response: Response){
     const value: string = await this.playerService.playerEnverinment();
-    const wallet: string = request.walletId;
+    const part = await this.partService.findPartById('4rrCdtGx2h');
     response.status(200).json({
-      wallet
+      part
     })
   }
 }

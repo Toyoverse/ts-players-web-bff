@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
-import Player from '../models/Player.model'
+import PlayerModel from '../models/Player.model'
 import * as Parse from 'parse/node';
 import { response } from 'express';
 import { json } from 'stream/consumers';
@@ -12,20 +12,20 @@ export class PlayerService {
     this.ParseServerConfiguration();
   }
 
-  async findPlayerByWalletAddress(walletAddress: string, transactionHash: string){
-    const Players = Parse.Object.extend("Players", Player);
+  async findPlayerByWalletAddress(walletAddress: string, transactionHash: string): Promise<PlayerModel>{
+    const Players = Parse.Object.extend("Players", PlayerModel);
     const playerQuery = new Parse.Query(Players);
     playerQuery.equalTo('walletAddress', walletAddress);
     try{
       const result = await playerQuery.find();
     
       if (result.length === 0){
-      return this.CreatePlayers(walletAddress, transactionHash);
+        return this.CreatePlayers(walletAddress, transactionHash);
       }
 
       this.VerifyDateToken(result[0], transactionHash);
 
-      const player: Player = this.PlayerMapper(result[0]);
+      const player: PlayerModel = this.PlayerMapper(result[0]);
 
       return player;
     }
@@ -39,7 +39,7 @@ export class PlayerService {
   async playerEnverinment(){
     return "ok";
   }
-  private CreatePlayers(walletAddress: string, transactionHash:string ): Player{
+  private CreatePlayers(walletAddress: string, transactionHash:string ): PlayerModel{
     const Player = Parse.Object.extend("Players");
     const player = new Player();
     
@@ -51,7 +51,7 @@ export class PlayerService {
       .then((player)=>{
         console.log('New player created with id: ' + player.id);
       }, () =>{
-        response.status(500).json({
+        return response.status(500).json({
           error: ['error trying to save player'],
         });
       });
@@ -63,9 +63,6 @@ export class PlayerService {
       process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
-   
-    console.log(token);
-    console.log('Generate token');
 
     return token;
   }
@@ -77,8 +74,8 @@ export class PlayerService {
     date.setDate(date.getDate()+days);
     return date;
   }
-  private PlayerMapper(result: Parse.Object<Parse.Attributes>): Player{
-    const player: Player = new Player();
+  private PlayerMapper(result: Parse.Object<Parse.Attributes>): PlayerModel{
+    const player: PlayerModel = new PlayerModel();
 
     player.wallet = result.get('walletAddress');
     player.token = result.get('sessionToken');
@@ -97,7 +94,9 @@ export class PlayerService {
       .then((player)=>{
         console.log('Player with id: ' + player.id + ' updated');
       }, (error) =>{
-        console.log('Failed to update ' + error.message);
+        return response.status(500).json({
+          error: ['Failed to update ' + error.message],
+        });
       });
     }
   }

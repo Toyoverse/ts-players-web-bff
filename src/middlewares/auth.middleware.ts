@@ -24,7 +24,6 @@ export class AuthMiddleware implements NestMiddleware {
 
     try{
         const data = jwt.verify(token, process.env.TOKEN_SECRET);
-        console.log(data);
 
         const { walletId } = data as TokenPayload;
         request.walletId = walletId;

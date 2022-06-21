@@ -1,20 +1,20 @@
 import e from 'express';
-import { Box } from './interfaces/Box';
-import { Parts } from './interfaces/Parts';
+import BoxModel from './Box.model';
+import PartsModel from './Part.model';
 import { Player } from './interfaces/Player'
-import { Toyo } from './interfaces/Toyo';
+import ToyoModel from './Toyo.model';
 
 export default class PlayerModel implements Player{
     private _wallet: string;
     private _token: string;
     private _expiresAt: Date;
     private _id: string;
-    private _toyos: Toyo;
+    private _toyos: ToyoModel;
     private _lastUnboxingFinishedAt: Date;
     private _hasPendingUnboxing: boolean;
     private _lastUnboxingStartedAt: Date;
-    private _toyoParts: Parts;
-    private _boxes: Box;
+    private _toyoParts: PartsModel[];
+    private _boxes: BoxModel;
 
     constructor(){}
 
@@ -47,10 +47,10 @@ export default class PlayerModel implements Player{
     set id(id: string){
         this._id = id;
     }
-    get toyos(): Toyo{
+    get toyos(): ToyoModel{
         return this._toyos;
     }
-    set toyos(toyos: Toyo){
+    set toyos(toyos: ToyoModel){
         this._toyos = toyos;
     }
     get lastUnboxingFinishedAt(): Date{
@@ -63,21 +63,21 @@ export default class PlayerModel implements Player{
         return this._hasPendingUnboxing;
     }
     get lastUnboxingStartedAt(): Date{
-        return this.lastUnboxingStartedAt;
+        return this._lastUnboxingStartedAt;
     }
     set lastUnboxiingStartedAt(lastUnboxiingStartedAt: Date){
         this._lastUnboxingStartedAt = lastUnboxiingStartedAt;
     }
-    get toyoParts(): Parts{
+    get toyoParts(): PartsModel[]{
         return this._toyoParts;
     }
-    set toyoParts(toyoParts: Parts){
+    set toyoParts(toyoParts: PartsModel[]){
         this._toyoParts = toyoParts;
     }
-    get boxes(): Box{
+    get boxes(): BoxModel{
         return this._boxes;
     }
-    set boxes(boxes: Box){
+    set boxes(boxes: BoxModel){
         this._boxes = boxes;
     }
     

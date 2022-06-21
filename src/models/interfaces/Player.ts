@@ -1,5 +1,5 @@
 import { Box } from "./Box";
-import { Parts } from "./Parts";
+import { Parts } from "./Part";
 import { Toyo } from "./Toyo";
 
 export interface Player {
@@ -11,7 +11,7 @@ export interface Player {
     lastUnboxingFinishedAt: Date;
     hasPendingUnboxing: boolean;
     lastUnboxingStartedAt: Date;
-    toyoParts: Parts;
+    toyoParts: Parts[];
     boxes: Box;
 
     getExpiresAtFormatted(expiresAt: Date): string;

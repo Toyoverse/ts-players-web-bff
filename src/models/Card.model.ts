@@ -31,7 +31,7 @@ export default class CardModel implements Card{
     get image(): string{
         return this._image;
     }
-    set imager(image: string){
+    set image(image: string){
         this._image = image;
     }
     get cardType(): string{
@@ -59,7 +59,7 @@ export default class CardModel implements Card{
         this._attackSubType = attackSubType;
     }
     get duration(): number{
-        return this.duration;
+        return this._duration;
     }
     set duration(duration: number){
         this._duration = duration;
@@ -73,7 +73,7 @@ export default class CardModel implements Card{
     get attackAnimation(): string{
         return this._attackAnimation;
     }
-    set attackAnimaiton(attackAnimaiton: string){
+    set attackAnimation(attackAnimaiton: string){
         this._attackAnimation = attackAnimaiton;
     }
     get effectName(): string{
