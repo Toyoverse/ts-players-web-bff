@@ -53,8 +53,9 @@ export class BoxService {
     box.hash = result.get('hash');
     box.idOpenBox = result.get('idOpenBox');
     box.idClosedBox = result.get('idClosedBox');
-    //box.player= result.get('player'); //id de player 
     box.parts = await this.PartsMapper(await result.relation('parts').query().find());
+    box.createdAt = result.get('createdAt');
+    box.updateAt = result.get('updatedAt');
 
     return box;
   } 

@@ -8,6 +8,9 @@ export interface Parts{
     cards: Card[];
     toyoPersona: ToyoPersona;
     toyoPiece: string; 
-    status: object;
+    stats: object;
+    createdAt: Date;
+    updateAt: Date;
+
 
 }

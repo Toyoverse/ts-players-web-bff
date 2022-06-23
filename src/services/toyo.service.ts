@@ -48,6 +48,8 @@ export class ToyoService {
     toyo.parts = await this.PartsMapper(await result.relation('parts').query().find());
     toyo.hasTenParts = result.get('hasTenParts');
     toyo.isToyoSelected = result.get('isToyoSelected');
+    toyo.createdAt = result.get('createdAt');
+    toyo.updateAt = result.get('updatedAt');
 
     return toyo;
   } 

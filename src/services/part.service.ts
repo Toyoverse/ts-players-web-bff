@@ -51,7 +51,9 @@ export class PartService {
     part.cards = await this.CardsMapper(result.get('cards'));
     part.toyoPersona = await this.toyoPersonaService.findToyoPersonaById(result.get('toyoPersona').id);
     part.toyoPiece = result.get('toyoPiece');
-    part.status = result.get('stats');
+    part.stats = result.get('stats');
+    part.createdAt = result.get('createdAt');
+    part.updateAt = result.get('updatedAt');
 
     return part;
   } 

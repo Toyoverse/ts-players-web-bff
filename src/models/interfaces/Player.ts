@@ -13,6 +13,9 @@ export interface Player {
     lastUnboxingStartedAt: Date;
     toyoParts: Parts[];
     boxes: Box[];
+    createdAt: Date;
+    updateAt: Date;
+
 
     getExpiresAtFormatted(expiresAt: Date): string;
 }

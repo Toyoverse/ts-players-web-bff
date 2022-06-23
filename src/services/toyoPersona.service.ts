@@ -44,6 +44,8 @@ export class ToyoPersonaService {
     toyo.thumbnail = result.get('thumbnail');
     toyo.video = result.get('video');
     toyo.bodyType = result.get('bodyType');
+    toyo.createdAt = result.get('createdAt');
+    toyo.updateAt = result.get('updatedAt');
 
     return toyo;
   }

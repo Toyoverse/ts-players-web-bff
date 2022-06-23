@@ -1,7 +1,7 @@
 export interface Card{
     id: string;
     attackType: string;
-    image: string;
+    image_: string;
     cardType: string;
     name: string;
     cost: number;
@@ -11,4 +11,7 @@ export interface Card{
     attackAnimation: string;
     effectName: string;
     applyEffect: boolean;
+    createdAt: Date;
+    updateAt: Date;
+
 }

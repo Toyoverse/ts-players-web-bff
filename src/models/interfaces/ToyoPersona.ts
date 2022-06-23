@@ -4,5 +4,7 @@ export interface ToyoPersona{
     thumbnail: string;
     video: string;
     bodyType: number;
+    createdAt: Date;
+    updateAt: Date;
 
 }

@@ -6,4 +6,7 @@ export interface Toyo{
     parts: Parts[];
     hasTenParts: boolean;
     isToyoSelected: boolean;
+    createdAt: Date;
+    updateAt: Date;
+
 }

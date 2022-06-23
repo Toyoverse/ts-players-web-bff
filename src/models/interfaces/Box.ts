@@ -12,5 +12,7 @@ export interface Box{
     idClosedBox: string;
     player: Player;
     parts: Parts[];
+    createdAt: Date;
+    updateAt: Date;
 
 }

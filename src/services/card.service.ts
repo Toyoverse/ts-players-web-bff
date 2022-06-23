@@ -42,16 +42,18 @@ export class CardService {
 
     card.id = result.id;
     card.attackType = result.get('attackType');
-    card.image = result.get('image_');
+    card.image_ = result.get('image_');
     card.cardType = result.get('cardType');
     card.name = result.get('name');
-    card.cost = result.get('number');
+    card.cost = result.get('cost');
     card.attackSubType = result.get('attackSubType');
     card.duration = result.get('duration');
     card.defenseType = result.get('defenseType');
     card.attackAnimation= result.get('attackAnimation');
     card.effectName = result.get('effectName');
     card.applyEffect = result.get('applyEffect');
+    card.createdAt = result.get('createdAt');
+    card.updateAt = result.get('updatedAt');
 
     return card;
   } 
