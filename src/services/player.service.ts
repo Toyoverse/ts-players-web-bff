@@ -42,7 +42,7 @@ export class PlayerService {
     } 
 
   }
-  async findPlayerEnverinmentByWalletId(walletId: string): Promise<PlayerModel>{
+  async findPlayerEnverinmentByWalletId(walletId: string): Promise<PlayerModel> {
     const Players = Parse.Object.extend("Players", PlayerModel);
     const playerQuery = new Parse.Query(Players);
     playerQuery.equalTo('walletAddress', walletId);
@@ -133,6 +133,7 @@ export class PlayerService {
 
     player.boxes = await this.BoxesMapper(await result.relation('boxes').query().find());
     player.toyos = await this.ToyosMapper(await result.relation('toyos').query().find())
+    player.wallet = result.get('walletAddress');
 
     return player;
   }

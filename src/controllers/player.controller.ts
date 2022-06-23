@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { PlayerService } from '../services/player.service';
 import { Request, Response } from 'express';
-import { BoxService } from 'src/services/box.service';
+import PlayerModel from 'src/models/Player.model';
 
 @Controller('player')
 export class PlayerController {
@@ -40,9 +40,22 @@ export class PlayerController {
 
   @Get('/environment')
   async environment(@Req() request: Request, @Res() response: Response){
-    const player = await this.playerService.findPlayerEnverinmentByWalletId(request.walletId);
-    response.status(200).json({
-      player
-    })
+    try {
+      const player = await this.playerService.findPlayerEnverinmentByWalletId(request.walletId);
+
+      if (player.wallet === request.walletId){
+        response.status(200).json({
+          player
+        })
+      } else {
+        return response.status(500).json({
+          error: ['The informed player does not match the returned player'],
+        });
+      }
+    } catch {
+      return response.status(500).json({
+        errors: ['Error could not return player'],
+      });
+    }
   }
 }
