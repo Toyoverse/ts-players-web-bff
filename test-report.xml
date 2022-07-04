@@ -1,3 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.test.ts">
+  </file>
+  <file path="/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.e2e.test.ts">
+    <testCase name="PlayerController (e2e) / (GET)" duration="337">
+      <failure message="Error: expected 200 &quot;OK&quot;, got 404 &quot;Not Found&quot;"><![CDATA[Error: expected 200 "OK", got 404 "Not Found"
+    at Object.<anonymous> (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/tests/player.e2e.test.ts:21:8)
+    at Promise.then.completed (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/jest-circus/build/utils.js:333:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/jest-circus/build/utils.js:259:10)
+    at _callCircusTest (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/jest-circus/build/run.js:277:40)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at _runTest (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/jest-circus/build/run.js:209:3)
+    at _runTestsForDescribeBlock (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/jest-circus/build/run.js:97:9)
+----
+    at Test._assertStatus (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/supertest/lib/test.js:252:14)
+    at /Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/supertest/lib/test.js:306:17
+    at Test._assertFunction (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/supertest/lib/test.js:285:13)
+    at Test.assert (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/supertest/lib/test.js:164:23)
+    at Server.localAssert (/Users/ulissessilva/Documents/Projetos/ts-players-web-bff/node_modules/supertest/lib/test.js:120:14)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
+    </testCase>
+  </file>
 </testExecutions>
