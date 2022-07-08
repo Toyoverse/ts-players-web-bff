@@ -7,12 +7,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const options: cors.CorsOptions = {
-    methods: ['GET', 'POST'],
-    origin: ['https://toyoverse-dev-front.herokuapp.com', 'http://localhost'],
-  };
+  const urls: string[] = process.env.CORS_ENABLED_URL.split('|');
 
-  app.enableCors(options);
+  app.enableCors({
+    methods: ['GET', 'POST'],
+    origin: urls,
+  });
   app.use(helmet());
 
   const config = new DocumentBuilder()
