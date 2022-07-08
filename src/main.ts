@@ -8,11 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const options: cors.CorsOptions = {
-    methods: 'GET,POST',
-    origin: '*'
+    methods: ['GET', 'POST'],
+    origin: ['https://toyoverse-dev-front.herokuapp.com', 'http://localhost'],
   };
 
-  app.use(cors(options));
+  app.enableCors(options);
   app.use(helmet());
 
   const config = new DocumentBuilder()
