@@ -13,14 +13,15 @@ export class PlayerService {
   }
 
   async findPlayerByWalletAddress(walletAddress: string, transactionHash: string){
+    const walletLowerCase:string = walletAddress.toLowerCase();
     const Players = Parse.Object.extend("Players", Player);
     const playerQuery = new Parse.Query(Players);
-    playerQuery.equalTo('walletAddress', walletAddress);
+    playerQuery.equalTo('walletAddress', walletLowerCase);
     try{
       const result = await playerQuery.find();
     
       if (result.length === 0){
-      return this.CreatePlayers(walletAddress, transactionHash);
+      return this.CreatePlayers(walletLowerCase, transactionHash);
       }
 
       this.VerifyDateToken(result[0], transactionHash);
@@ -36,12 +37,12 @@ export class PlayerService {
     } 
 
   }
-  private CreatePlayers(walletAddress: string, transactionHash:string ): Player{
+  private CreatePlayers(walletLowerCase: string, transactionHash:string ): Player{
     const Player = Parse.Object.extend("Players");
     const player = new Player();
     
-    player.set("walletAddress", walletAddress);
-    player.set('sessionToken', this.GenerateToken(walletAddress, transactionHash));
+    player.set("walletAddress", walletLowerCase);
+    player.set('sessionToken', this.GenerateToken(walletLowerCase, transactionHash));
     player.set('sessionTokenExpiresAt', this.ExpiresAt());
 
     player.save()
@@ -55,8 +56,8 @@ export class PlayerService {
     
     return this.PlayerMapper(player);
   }
-  private GenerateToken(walletAddress:String, transactionHash:string): string{
-    const token: string = jwt.sign({ walletId: walletAddress, transaction: transactionHash}, 
+  private GenerateToken(walletLowerCase:String, transactionHash:string): string{
+    const token: string = jwt.sign({ walletId: walletLowerCase, transaction: transactionHash}, 
       process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
