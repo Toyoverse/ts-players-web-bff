@@ -62,6 +62,9 @@ export default class PlayerModel implements Player {
   get hasPendingUnboxing(): boolean {
     return this._hasPendingUnboxing;
   }
+  set hasPendingUnboxing(hasPendingUnboxing: boolean){
+    this._hasPendingUnboxing = hasPendingUnboxing;
+  }
   get lastUnboxingStartedAt(): Date {
     return this.lastUnboxingStartedAt;
   }
