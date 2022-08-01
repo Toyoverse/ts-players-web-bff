@@ -44,15 +44,9 @@ export class PlayerService {
     player.set("walletAddress", walletLowerCase);
     player.set('sessionToken', this.GenerateToken(walletLowerCase, transactionHash));
     player.set('sessionTokenExpiresAt', this.ExpiresAt());
+    player.set('hasPendingUnboxing', false);
 
-    player.save()
-      .then((player)=>{
-        console.log('New player created with id: ' + player.id);
-      }, () =>{
-        response.status(500).json({
-          error: ['error trying to save player'],
-        });
-      });
+    player.save();
     
     return this.PlayerMapper(player);
   }
@@ -61,10 +55,6 @@ export class PlayerService {
       process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
-   
-    console.log(token);
-    console.log('Generate token');
-
     return token;
   }
 
@@ -81,6 +71,7 @@ export class PlayerService {
     player.wallet = result.get('walletAddress');
     player.token = result.get('sessionToken');
     player.expiresAt = result.get('sessionTokenExpiresAt');
+    player.hasPendingUnboxing = result.get('hasPendingUnboxing');
 
     return player;
   }
@@ -91,12 +82,7 @@ export class PlayerService {
       result.set('sessionToken', this.GenerateToken(result.get('walletAddress'), hash));
       result.set('sessionTokenExpiresAt', this.ExpiresAt());
 
-      result.save()
-      .then((player)=>{
-        console.log('Player with id: ' + player.id + ' updated');
-      }, (error) =>{
-        console.log('Failed to update ' + error.message);
-      });
+      result.save();
     }
   }
 

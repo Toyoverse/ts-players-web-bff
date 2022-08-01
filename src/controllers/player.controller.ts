@@ -40,6 +40,7 @@ export class PlayerController {
         return response.status(200).json({
           token: player.token,
           expiresAt: player.getExpiresAtFormatted(player.expiresAt),
+          hasPendingUnboxing: player.hasPendingUnboxing
         });
       } else {
         return response.status(500).json({
