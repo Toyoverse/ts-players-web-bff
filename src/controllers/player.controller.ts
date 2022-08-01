@@ -36,7 +36,7 @@ export class PlayerController {
         transactionHash,
       );
 
-      if (player.wallet === wallet) {
+      if (player.wallet === wallet.toLowerCase()) {
         return response.status(200).json({
           token: player.token,
           expiresAt: player.getExpiresAtFormatted(player.expiresAt),
