@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import ToyoPersona from '../models/ToyoPersona.model'
+import ToyoPersona from '../models/ToyoPersona.model';
 import * as Parse from 'parse/node';
 import { response } from 'express';
 import { json } from 'stream/consumers';
@@ -11,15 +11,15 @@ export class ToyoPersonaService {
     this.ParseServerConfiguration();
   }
 
-  async findToyoPersonaByBodyTyper(bodyType: number,){
-    const toyoPersona = Parse.Object.extend("ToyoPersona", ToyoPersona);
+  async findToyoPersonaByBodyTyper(bodyType: number) {
+    const toyoPersona = Parse.Object.extend('ToyoPersona', ToyoPersona);
     const toyoPersonaQuery = new Parse.Query(toyoPersona);
     toyoPersonaQuery.equalTo('bodyType', bodyType);
-    
-    try{
+
+    try {
       const result = await toyoPersonaQuery.find();
-    
-      if (result.length < 1 || result[0].get('bodyType') !== bodyType){
+
+      if (result.length < 1 || result[0].get('bodyType') !== bodyType) {
         response.status(404).json({
           erros: ['Toyo persona not found!'],
         });
@@ -30,16 +30,16 @@ export class ToyoPersonaService {
       console.log('Toyo Persona Service');
 
       return toyo;
-    }
-    catch(error){
+    } catch (error) {
       response.status(500).json({
         error: [error.message],
       });
-    } 
-
+    }
   }
 
-  private ToyoPersonaMapper(result: Parse.Object<Parse.Attributes>): ToyoPersona{
+  private ToyoPersonaMapper(
+    result: Parse.Object<Parse.Attributes>,
+  ): ToyoPersona {
     const toyo: ToyoPersona = new ToyoPersona();
 
     toyo.id = result.get('objectId');
