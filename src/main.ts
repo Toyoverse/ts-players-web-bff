@@ -5,14 +5,7 @@ import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
-  const urls: string[] = process.env.CORS_ENABLED_URL.split('|');
-
-  app.enableCors({
-    methods: ['GET', 'POST', 'OPTIONS'],
-    origin: urls,
-  });
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.use(helmet());
 
   const config = new DocumentBuilder()
@@ -23,6 +16,14 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  const options: cors.CorsOptions = {
+    methods: 'GET,POST,OPTIONS',
+    origin: '*',
+  };
+
+  app.use(cors(options));
+
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
