@@ -94,15 +94,15 @@ export class PlayerService {
   ): void {
     const now = new Date();
 
-    if (result.get('sessionTokenExpiresAt') < now) {
-      result.set(
-        'sessionToken',
-        this.GenerateToken(result.get('walletAddress'), hash),
-      );
-      result.set('sessionTokenExpiresAt', this.ExpiresAt());
+    // if (result.get('sessionTokenExpiresAt') < now) {
+    result.set(
+      'sessionToken',
+      this.GenerateToken(result.get('walletAddress'), hash),
+    );
+    result.set('sessionTokenExpiresAt', this.ExpiresAt());
 
-      result.save();
-    }
+    result.save();
+    // }
   }
 
   /**
